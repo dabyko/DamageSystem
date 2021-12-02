@@ -30,7 +30,10 @@ public class HealthStatus : MonoBehaviour
 
     public Image fill;
 
-   
+    private void Start()
+    {
+        fill.color = fillColor;
+    }
     private void Update()
     {
         CheckFill();
@@ -44,6 +47,6 @@ public class HealthStatus : MonoBehaviour
 
         mask.fillAmount = fillAmount;
 
-        fill.color = fillColor;
+        //fill.color = fillColor;
     }
 }

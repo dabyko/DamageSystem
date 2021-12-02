@@ -879,6 +879,7 @@ GameObject:
   - component: {fileID: 1747782830}
   - component: {fileID: 1747782829}
   - component: {fileID: 1747782828}
+  - component: {fileID: 1747782833}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -977,6 +978,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1747782833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747782827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a620e9f43aa344aa3d553c3ae1e5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionObject: {fileID: 2125573389}
+  transitionTime: 1
+  transitionColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.6679425, a: 1}
+  - {r: 0.9556836, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.91608214, a: 1}
+  - {r: 0, g: 1, b: 0.09281945, a: 1}
+  m_gradient:
+    serializedVersion: 2
+    key0: {r: 0, g: 1, b: 0.09281945, a: 0.75686276}
+    key1: {r: 0, g: 1, b: 0.91608214, a: 1}
+    key2: {r: 0.9556836, g: 1, b: 0, a: 0.654902}
+    key3: {r: 1, g: 0, b: 0.6679425, a: 0.827451}
+    key4: {r: 1, g: 0, b: 0, a: 1}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 10409
+    ctime1: 20432
+    ctime2: 31611
+    ctime3: 41056
+    ctime4: 55898
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 16384
+    atime2: 32768
+    atime3: 49151
+    atime4: 65535
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 5
+  m_valColor: 1
+--- !u!114 &2125573389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2676372180258910457, guid: 0cb41531127e00d49aa8917ecd8875e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 2676372179568336141}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2676372179568336141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1098,6 +1161,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LinearHealthCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676372179352622717, guid: 0cb41531127e00d49aa8917ecd8875e0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cb41531127e00d49aa8917ecd8875e0, type: 3}
