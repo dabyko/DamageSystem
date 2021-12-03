@@ -11,6 +11,7 @@ using UnityEditor;
 
 [System.Serializable]
 public class HealthChangeState : UnityEvent<float> { }
+
 [ExecuteInEditMode()]
 public class HealthStatus : MonoBehaviour
 {
@@ -22,45 +23,38 @@ public class HealthStatus : MonoBehaviour
         obj.transform.SetParent(Selection.activeGameObject.transform, false);
     }
 #endif
-    public int minimum;
 
-    public int maximum;
+    [SerializeField]  private int m_minHealth;
 
-    public int current;
+    [SerializeField]  private int m_maxHealth;
 
-    public Image mask;
+    [SerializeField] private Image m_maskBar; 
+    
+    [SerializeField] private Image m_fillBar;
 
-    public Color fillColor;
+    [SerializeField] private int _curHealth; 
 
-    public Image fill;
+    public HealthChangeState OnHealthStateChange = new HealthChangeState();
 
-    public HealthChangeState OnStateChange = new HealthChangeState();
-
-    private void Start()
-    {
-        fill.color = fillColor;
-    }
     private void Update()
     {
-        Debug.Log("Current health state" + current);
-
         CheckFill();
     }
 
     void CheckFill()
     {
-        float currentOffset = current - minimum;
-        float maximumOffset = maximum - minimum;
+        float currentOffset = _curHealth - m_minHealth;
+        float maximumOffset = m_maxHealth - m_minHealth;
         float fillAmount = currentOffset / maximumOffset;
 
-        mask.fillAmount = fillAmount;
+       
+        m_maskBar.fillAmount = fillAmount;
 
-        OnStateChange.Invoke(mask.fillAmount);
-        //fill.color = fillColor;
+        OnHealthStateChange.Invoke(m_maskBar.fillAmount);
     }
 
     public void ChangeCurrentState(int value)
     {
-        current = value;
+        _curHealth = value;
     }
 }

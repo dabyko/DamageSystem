@@ -19,18 +19,18 @@ public class ColorTransitor : MonoBehaviour
 
     float t = 0f;
 
-    int len;
+    private int _colorsCount;
 
     private void Start()
     {
-        InitGradient();
+        MarkOutGradient();
+
+        ChangeColorByValue(m_currentColor);
     }
 
-    private void Update()
-    {
-        ChangeColorByValue(m_currentColor);
-        return;
 
+    private void GradiantFomation()
+    {
         transitionObject.color = Color.Lerp(transitionObject.color, transitionColors[colorIndex], transitionTime * Time.deltaTime);
 
         t = Mathf.Lerp(t, 1f, transitionTime * Time.deltaTime);
@@ -39,32 +39,36 @@ public class ColorTransitor : MonoBehaviour
         {
             t = 0f;
             colorIndex++;
-            colorIndex = (colorIndex >= len) ? 0 : colorIndex;
+            colorIndex = (colorIndex >= transitionColors.Length) ? 0 : colorIndex;
         }
-          
-
     }
 
     public void ChangeColorByValue(float val)
     {
-        Debug.Log("Value for color: " + val);
+        m_currentColor = val;
         transitionObject.color = m_gradient.Evaluate(val);
     }
 
     [ContextMenu("Apply Color")]
-    private void InitGradient()
+    private void MarkOutGradient()
     {
-        len = transitionColors.Length;
-        var color = new GradientColorKey[len];
-        var alpha = new GradientAlphaKey[len];
+        _colorsCount = transitionColors.Length;
+
+        var color = new GradientColorKey[_colorsCount];
+        var alpha = new GradientAlphaKey[_colorsCount];
+
         float time = 0f;
-        float delta = 1f / len;
-        float error = delta / (len - 1);
-        for (int i = 0; i < len; i++)
+        float delta = 1f / _colorsCount;
+
+        //Последний сектору достается больше чем нужно, по этому мы берем его пространство и разбиваем на все, кроме первого, для выравнивания секторов
+        float compensation = delta / (_colorsCount - 1);
+
+
+        for (int i = 0; i < _colorsCount; i++)
         {
             color[i] = new GradientColorKey(transitionColors[i], time);
             alpha[i] = new GradientAlphaKey(1.0f, time);
-            time += (delta + error);
+            time += (delta + compensation);
         }
 
         m_gradient.SetKeys(color, alpha);
