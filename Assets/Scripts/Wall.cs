@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
+[System.Serializable]
+public class GetDamage : UnityEvent<int> { }
 public class Wall : MonoBehaviour,IScattering
 {
-    [SerializeField] private float _maxHealth;
-    private float _currentHealth;
+    [SerializeField] private int _maxHealth;
+    private int _currentHealth;
+
+    public GetDamage OnGetDamage = new GetDamage();
+    public UnityEvent OnDestroy;
 
     private void Start()
     {
@@ -14,13 +19,16 @@ public class Wall : MonoBehaviour,IScattering
     public void ApplyImpairment(int impairmentValue)
     {
         _currentHealth -= impairmentValue;
+        Debug.Log("Current wall health" + _currentHealth);
+        OnGetDamage.Invoke(_currentHealth);
 
-        Debug.Log("Wall received damage and now I have " + _currentHealth + " life units");
 
         if (_currentHealth <= 0)
         {
-            Debug.Log(this.gameObject.name + " destroyed");
+            OnDestroy.Invoke();
             Destroy(this.gameObject);
         }
     }
+
+
 }

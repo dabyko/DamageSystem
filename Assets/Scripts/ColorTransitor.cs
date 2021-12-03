@@ -12,7 +12,7 @@ public class ColorTransitor : MonoBehaviour
     [SerializeField] GradientColorKey[] colorKey;
     [SerializeField] GradientAlphaKey[] alphaKey;
 
-    [SerializeField] [Range(0f, 1f)] float m_valColor = 1f;
+    [SerializeField] [Range(0f, 1f)] float m_currentColor = 1f;
     
 
     int colorIndex = 0;
@@ -28,9 +28,9 @@ public class ColorTransitor : MonoBehaviour
 
     private void Update()
     {
-        ChangeColorByValue(m_valColor);
+        ChangeColorByValue(m_currentColor);
         return;
-        Debug.Log("ColorIndex: " + colorIndex);
+
         transitionObject.color = Color.Lerp(transitionObject.color, transitionColors[colorIndex], transitionTime * Time.deltaTime);
 
         t = Mathf.Lerp(t, 1f, transitionTime * Time.deltaTime);
@@ -45,8 +45,9 @@ public class ColorTransitor : MonoBehaviour
 
     }
 
-    private void ChangeColorByValue(float val)
+    public void ChangeColorByValue(float val)
     {
+        Debug.Log("Value for color: " + val);
         transitionObject.color = m_gradient.Evaluate(val);
     }
 
